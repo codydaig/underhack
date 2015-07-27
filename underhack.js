@@ -2,11 +2,6 @@
 
 var _ = {};
 
-_.VERSION = '0.0.1';
-
-_.nativeKeys = Object.keys
-
-_.MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 
 _.property = function(key) {
   return function(obj) {
@@ -14,14 +9,10 @@ _.property = function(key) {
   };
 };
 
-_.getLength = _.property('length');
-
 _.isArrayLike = function(collection) {
   var length = _.getLength(collection);
   return typeof length == 'number' && length >= 0 && length <= _.MAX_ARRAY_INDEX;
 };
-
-_.hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
 
 _.isObject = function(obj) {
   var type = typeof obj;
@@ -83,9 +74,7 @@ _.allKeys = function(obj) {
   return keys;
 };
 
-_.forEach = _.each;
-
-_.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
+_.include = function(obj, item, fromIndex, guard) {
  if (!_.isArrayLike(obj)) obj = _.values(obj);
  if (typeof fromIndex != 'number' || guard) fromIndex = 0;
  return _.indexOf(obj, item, fromIndex) >= 0;
@@ -127,10 +116,6 @@ _.createPredicateIndexFinder = function(dir) {
   };
 };
 
-_.indexOf = _.createIndexFinder(1, _.findIndex, _.sortedIndex);
-
-_.findIndex = _.createPredicateIndexFinder(1);
-
 _.createAssigner = function(keysFunc, undefinedOnly) {
   return function(obj) {
     var length = arguments.length;
@@ -148,7 +133,24 @@ _.createAssigner = function(keysFunc, undefinedOnly) {
   };
 };
 
+_.VERSION = '0.0.1';
+
+_.contains = _.includes = _.include;
+
 _.extend = _.createAssigner(_.allKeys);
 
+_.findIndex = _.createPredicateIndexFinder(1);
+
+_.forEach = _.each;
+
+_.getLength = _.property('length');
+
+_.hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
+
+_.indexOf = _.createIndexFinder(1, _.findIndex, _.sortedIndex);
+
+_.MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+
+_.nativeKeys = Object.keys;
 
 module.exports = exports = _;
