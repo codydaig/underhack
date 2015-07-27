@@ -6,4 +6,4 @@ Tests should cover what Underscore and Lodash both cover (plus more if applicabl
 
 | func  | Code  | Test |
 |:-----:|:-----:|:----:|
-| each  | [ ] | [ ] |
+| each  | * [ ] | [ ] |
