@@ -21,6 +21,8 @@ _.isArrayLike = function(collection) {
   return typeof length == 'number' && length >= 0 && length <= _.MAX_ARRAY_INDEX;
 };
 
+_.hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
+
 _.isObject = function(obj) {
   var type = typeof obj;
   return type === 'function' || type === 'object' && !!obj;
@@ -69,6 +71,15 @@ _.keys = function(obj) {
   for (var key in obj) if (_.has(obj, key)) keys.push(key);
   // Ahem, IE < 9.
   if (hasEnumBug) collectNonEnumProps(obj, keys);
+  return keys;
+};
+
+_.allKeys = function(obj) {
+  if (!_.isObject(obj)) return [];
+  var keys = [];
+  for (var key in obj) keys.push(key);
+  // Ahem, IE < 9.
+  if (_.hasEnumBug) collectNonEnumProps(obj, keys);
   return keys;
 };
 
@@ -138,5 +149,6 @@ _.createAssigner = function(keysFunc, undefinedOnly) {
 };
 
 _.extend = _.createAssigner(_.allKeys);
+
 
 module.exports = exports = _;
