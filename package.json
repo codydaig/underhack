@@ -1,0 +1,28 @@
+{
+  "name": "underhack",
+  "version": "0.0.1",
+  "description": "UnderHack ",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codydaig/underhack.git"
+  },
+  "author": "Cody B. Daig",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codydaig/underhack/issues"
+  },
+  "homepage": "https://github.com/codydaig/underhack#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
