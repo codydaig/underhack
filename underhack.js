@@ -2,6 +2,28 @@
 
 var _ = {};
 
+/*************************************************************************
+ * Constants
+ */
+
+/**
+ * The Version of underhack
+ */
+_.VERSION = '0.0.1';
+
+/**
+ * Set the Maximum array size
+ */
+_.MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+
+/**
+ * Shortcut to the native Object.keys
+ */
+_.nativeKeys = Object.keys;
+
+/*************************************************************************
+ * Functions
+ */
 
 _.property = function(key) {
   return function(obj) {
@@ -133,15 +155,9 @@ _.createAssigner = function(keysFunc, undefinedOnly) {
   };
 };
 
-_.VERSION = '0.0.1';
-
-_.contains = _.includes = _.include;
-
 _.extend = _.createAssigner(_.allKeys);
 
 _.findIndex = _.createPredicateIndexFinder(1);
-
-_.forEach = _.each;
 
 _.getLength = _.property('length');
 
@@ -149,8 +165,29 @@ _.hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
 
 _.indexOf = _.createIndexFinder(1, _.findIndex, _.sortedIndex);
 
-_.MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+/*************************************************************************
+ * Aliases
+ */
 
-_.nativeKeys = Object.keys;
+/**
+ * _.contains
+ * @alias _.include
+ */
+_.contains = _.include;
 
+/**
+ * _.includes
+ * @alias _.include
+ */
+_.includes = _.include;
+
+/**
+ * _.forEach
+ * @alias _.each
+ */
+_.forEach = _.each;
+
+/*************************************************************************
+ * Export the _ object.
+ */
 module.exports = exports = _;
